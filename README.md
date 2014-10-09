@@ -50,8 +50,29 @@ public function store()
 {
     $input = Input::only('title', 'subtitle', 'author');
 
-    $podcast = new Podcast;
+    $podcast = Podcast::create($input);
 
     Evento::fire(new PodcastAdded($podcast));
 }
   ```
+
+Now it is most likely you'll want to create a folder in which to keep all your events. I'd call this the *Events* folder. The `PodcastAdded` class is an example for how to name your events inside that folder.
+
+### Listening for the events
+After raising the events, you will then want to listen to them. For this, Evento provides you with a handy class: **EventListener**. To use it you'll simply have to extend it:
+
+```php
+<?php namespace Habitat\Listeners;
+
+use Koalabs\Evento\EventListener;
+use Habitat\Podcasts\Events\PodcastAdded;
+
+class EmailNotifier extends EventListener {
+
+  public function whenPodcastAdded(PodcastAdded $podcast)
+  {
+    // Do some stuff here
+  }
+
+}
+```
