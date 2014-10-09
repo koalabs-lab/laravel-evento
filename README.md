@@ -62,7 +62,6 @@ Now it is most likely you'll want to create a folder in which to keep all your e
 After raising the events, you will then want to listen to them. For this, Evento provides you with a handy class: **EventListener**. To use it you'll simply have to extend it:
 
 ```php
-<?php namespace Podcasts\Listeners;
 
 use Koalabs\Evento\EventListener;
 use Podcasts\Events\PodcastAdded;
@@ -78,3 +77,34 @@ class EmailNotifier extends EventListener {
 ```
 
 It's important to note the naming convention: **Every method handling an event has to start with the word `when`**.
+
+### One nice little trick
+You can automate much of your Event listening with a Service Provider of your own. Try this (maybe inside a `Listeners` folder or something):
+
+```php
+
+use Illuminate\Support\ServiceProvider;
+
+class ListenerServiceProvider extends ServiceProvider {
+
+  /**
+   * Register the service provider
+   * 
+   * @return void
+   */
+  public function register()
+  {
+    $listeners = $this->app['config']->get('evento::listeners');
+
+    foreach ($listeners as $listener)
+    {
+      $this->app['events']->listen('Habitat.*', $listener);
+    }
+  }
+
+}
+```
+
+Oh and don't forget to export the configuration files.:
+
+`php artisan config:publish koalabs/evento`
