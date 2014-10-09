@@ -18,7 +18,7 @@ class EventoServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		//
+		$this->registerFacadeAccess();
 	}
 
 	/**
@@ -28,7 +28,12 @@ class EventoServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array();
+		return ['evento'];
+	}
+
+	protected function registerFacadeAccess()
+	{
+		$this->app->bind('evento', 'Koalabs\Evento\EventDispatcher');
 	}
 
 }
