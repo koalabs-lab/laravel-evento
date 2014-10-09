@@ -46,12 +46,12 @@ You'd have a `PodcastsController` with all the usual CRUD methods. For the sake 
   *
   * @return Response
   */
-  public function store()
-  {
+public function store()
+{
     $input = Input::only('title', 'subtitle', 'author');
 
     $podcast = new Podcast;
 
     Evento::fire(new PodcastAdded($podcast));
-  }
+}
   ```
