@@ -42,10 +42,10 @@ You'd have a `PodcastsController` with all the usual CRUD methods. For the sake 
 
 ```php
 /**
-   * Store a newly created resource in storage.
-   *
-   * @return Response
-   */
+  * Store a newly created resource in storage.
+  *
+  * @return Response
+  */
   public function store()
   {
     $input = Input::only('title', 'subtitle', 'author');
