@@ -76,3 +76,5 @@ class EmailNotifier extends EventListener {
 
 }
 ```
+
+It's important to note the naming convention: **Every method handling an event has to start with the word `when`**.
