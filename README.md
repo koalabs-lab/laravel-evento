@@ -16,7 +16,7 @@ In your application's root directory, open up the *composer.json* file and add t
 },
 ```
 
-Open the command line, and in the root ot our application, run the Composer update like this:
+Open the command line, and in the root of your application, run the Composer update like this:
 
 ```
 php composer.phar update
@@ -35,4 +35,23 @@ Optionally, you may want to add the Facade for beautiful Laravel-friendly semant
 ```
 
 ## Usage
-The way I imagine myself using this is directly on the controllers. Using it alongside a repository pattern or even in your models is also valid.
+The way I picture myself using this is directly on the controllers. Using it alongside a repository pattern or even in your models is also valid.
+
+Now imagine you were creating an application for managing a podcasts directory.
+You'd have a `PodcastsController` with all the usual CRUD methods. For the sake of simplicity, let's only look at the `store` method. It could look something like this:
+
+```php
+/**
+   * Store a newly created resource in storage.
+   *
+   * @return Response
+   */
+  public function store()
+  {
+    $input = Input::only('title', 'subtitle', 'author');
+
+    $podcast = new Podcast;
+
+    Evento::fire(new PodcastAdded($podcast));
+  }
+  ```
