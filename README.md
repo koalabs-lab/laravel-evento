@@ -62,10 +62,10 @@ Now it is most likely you'll want to create a folder in which to keep all your e
 After raising the events, you will then want to listen to them. For this, Evento provides you with a handy class: **EventListener**. To use it you'll simply have to extend it:
 
 ```php
-<?php namespace Habitat\Listeners;
+<?php namespace Podcasts\Listeners;
 
 use Koalabs\Evento\EventListener;
-use Habitat\Podcasts\Events\PodcastAdded;
+use Podcasts\Events\PodcastAdded;
 
 class EmailNotifier extends EventListener {
 
